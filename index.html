@@ -65,11 +65,17 @@
     max-width: 1000px;
   }
   .cover h1 {
-    font-size: 5.2rem;
+    font-size: clamp(3.2rem, 5vw + 2.2rem, 5.8rem);
     font-weight: 900;
     margin: 0;
-    text-wrap: balance;
     color: var(--accent);
+    line-height: 1.25;
+  }
+  .cover h1 .cover-title-part {
+    white-space: nowrap;
+  }
+  .cover h1 .cover-title-part + .cover-title-part {
+    margin-left: 0.3em;
   }
   .cover-parts {
     display: flex;
@@ -474,6 +480,7 @@
   }
   .agenda-sub-duration {
     color: var(--text-muted);
+    white-space: nowrap;
   }
   
   /* 議程流程投影片（校長致詞／大合照／分組討論／綜合討論／會議結束） */
@@ -484,7 +491,7 @@
   }
   .flow-title-heading {
     margin: 0;
-    font-size: clamp(2.2rem, 3vh + 1.8rem, 4rem);
+    font-size: clamp(2.6rem, 3.8vh + 2.1rem, 4.8rem);
     font-weight: 900;
     text-wrap: balance;
   }
@@ -501,7 +508,7 @@
     padding: clamp(28px, 5vh, 56px) clamp(32px, 6vw, 64px);
   }
   .flow-discuss-card .flow-title-heading {
-    font-size: clamp(1.8rem, 2.4vh + 1.4rem, 3rem);
+    font-size: clamp(2.1rem, 3vh + 1.6rem, 3.6rem);
   }
   .flow-topic {
     margin: clamp(12px, 2vh, 22px) 0 0;
@@ -510,9 +517,9 @@
     color: var(--accent);
   }
   .flow-instructions {
-    margin: clamp(14px, 2.2vh, 26px) 0 0;
+    margin: clamp(16px, 2.6vh, 30px) 0 0;
     color: var(--text-muted);
-    font-size: clamp(0.95rem, 1.2vh + 0.7rem, 1.25rem);
+    font-size: clamp(1.1rem, 1.5vh + 0.85rem, 1.5rem);
     line-height: 1.7;
   }
   .flow-instructions p + p {
@@ -534,7 +541,7 @@
   }
   .flow-qr-frame img {
     display: block;
-    width: clamp(140px, 20vh, 220px);
+    width: clamp(150px, 23vh, 240px);
     height: auto;
     border-radius: 4px;
   }
@@ -542,7 +549,7 @@
     width: clamp(160px, 24vh, 240px);
   }
   .flow-short-link {
-    font-size: clamp(0.95rem, 1.2vh + 0.7rem, 1.2rem);
+    font-size: clamp(1.05rem, 1.4vh + 0.8rem, 1.4rem);
     color: var(--accent);
     font-weight: 700;
     text-decoration: none;
@@ -582,24 +589,6 @@
     padding: 8px 16px;
     box-shadow: 0 12px 30px -18px rgba(20, 24, 33, 0.3);
     z-index: 10;
-  }
-  .deck-nav button.arrow {
-    border: none;
-    background: none;
-    color: var(--text);
-    font-size: 1.1rem;
-    line-height: 1;
-    cursor: pointer;
-    padding: 6px 8px;
-    border-radius: 8px;
-  }
-  .deck-nav button.arrow:hover {
-    background: var(--accent-soft);
-  }
-  .deck-nav button.arrow:disabled {
-    opacity: 0.3;
-    cursor: default;
-    background: none;
   }
   .dots {
     display: flex;
@@ -645,12 +634,11 @@
   <div class="deck" id="deck">
     <section class="slide active" data-index="0">
     <div class="cover">
-      <h1>逢甲大學115學年系所主管會議</h1>
+      <h1><span class="cover-title-part">逢甲大學</span><span class="cover-title-part">115學年度系所主管會議</span></h1>
       <div class="cover-parts">
         <span>Part 1　主管大數據</span>
         <span>Part 2　Kahoot 互動</span>
         <span>Part 3　會議議程</span>
-        <span>Part 4　議程流程</span>
       </div>
     </div></section>
 <section class="slide" data-index="1">
@@ -989,21 +977,20 @@
     </div></section>
 <section class="slide" data-index="10">
     <div class="card flow-title-card">
-      <div class="part-eyebrow">PART 4 ・ 議程流程</div>
+      
       <h2 class="flow-title-heading">校長致詞暨新任一級主管介紹</h2>
       
     </div></section>
 <section class="slide" data-index="11">
     <div class="card flow-title-card">
-      <div class="part-eyebrow">PART 4 ・ 議程流程</div>
+      
       <h2 class="flow-title-heading">大合照暨茶敍時間</h2>
       <p class="flow-title-subtitle">14:35–14:55</p>
     </div></section>
 <section class="slide" data-index="12">
     <div class="card flow-discuss-card">
-      <div class="part-eyebrow">PART 4 ・ 議程流程</div>
+      
       <h2 class="flow-title-heading">各學院分組討論</h2>
-      <p class="flow-topic">【討論議題：OOOOO（待定）】</p>
       <div class="flow-instructions"><p>1. 各學院需上傳一個檔案呈現結論，並請標示學院名稱。</p><p>2. 檔案類型可為照片、WORD、PowerPoint。</p></div>
       <div class="flow-upload">
         <div class="flow-qr-frame">
@@ -1014,13 +1001,13 @@
     </div></section>
 <section class="slide" data-index="13">
     <div class="card flow-title-card">
-      <div class="part-eyebrow">PART 4 ・ 議程流程</div>
+      
       <h2 class="flow-title-heading">綜合討論</h2>
       
     </div></section>
 <section class="slide" data-index="14">
     <div class="card flow-end-card">
-      <div class="part-eyebrow">PART 4 ・ 議程流程</div>
+      
       <h2 class="flow-title-heading">會議結束，前往餐廳</h2>
       <p class="flow-address">陸家嘴<br>台中市西屯區華美西街二段309號</p>
       <div class="flow-qr-frame flow-qr-frame--map">
@@ -1031,7 +1018,6 @@
   </div>
   
   <nav class="deck-nav">
-    <button class="arrow" id="prevBtn" type="button" aria-label="上一頁">‹</button>
     <div class="dots">
       <button class="dot active" data-index="0" aria-label="投影片 1"></button>
 <button class="dot" data-index="1" aria-label="投影片 2"></button>
@@ -1049,23 +1035,18 @@
 <button class="dot" data-index="13" aria-label="投影片 14"></button>
 <button class="dot" data-index="14" aria-label="投影片 15"></button>
     </div>
-    <button class="arrow" id="nextBtn" type="button" aria-label="下一頁">›</button>
   </nav>
 
 <script>
 (function () {
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
-  var prevBtn = document.getElementById('prevBtn');
-  var nextBtn = document.getElementById('nextBtn');
   var fsToggle = document.getElementById('fsToggle');
   var current = 0;
   
   function render() {
     slides.forEach(function (el, i) { el.classList.toggle('active', i === current); });
     dots.forEach(function (el, i) { el.classList.toggle('active', i === current); });
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === slides.length - 1;
   }
   
   function goTo(index) {
@@ -1077,8 +1058,6 @@
   function next() { goTo(current + 1); }
   function prev() { goTo(current - 1); }
   
-  prevBtn.addEventListener('click', prev);
-  nextBtn.addEventListener('click', next);
   dots.forEach(function (dot, i) {
     dot.addEventListener('click', function () { goTo(i); });
   });
