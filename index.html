@@ -593,6 +593,133 @@
     color: var(--text);
     background: var(--accent-soft);
   }
+  
+  /* ============================================================
+     手機 RWD（≤760px）：直式手機瀏覽用，簡報／投影時不受影響。
+     讓每張投影片自己可垂直捲動，取代固定高度＋overflow:hidden，
+     這樣任何頁面在窄螢幕都不會被裁切；雙欄版面收成單欄。
+     ============================================================ */
+  @media (max-width: 760px) {
+    body {
+      overflow: visible;
+    }
+    .deck {
+      height: auto;
+      min-height: 100vh;
+    }
+    .slide {
+      position: relative;
+      inset: auto;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 28px 16px 48px;
+      overflow: visible;
+      transform: none !important;
+    }
+    .slide:not(.active) {
+      display: none;
+    }
+    .slide:has(.agenda-card) {
+      padding: 20px 12px 40px;
+    }
+    .card {
+      max-height: none;
+      overflow: visible;
+      max-width: 100%;
+      padding: 24px 18px;
+      margin: 0 auto;
+    }
+    .agenda-card {
+      max-width: 100%;
+      max-height: none;
+      padding: 16px 12px;
+    }
+    
+    /* 封面 */
+    .cover h1 {
+      font-size: clamp(1.6rem, 7.5vw, 2.5rem);
+      line-height: 1.35;
+    }
+    .cover-parts {
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .cover-parts span {
+      font-size: 0.85rem;
+      padding: 6px 14px;
+    }
+    
+    /* 長條圖 */
+    .bar-row {
+      grid-template-columns: 5em 1fr auto;
+      gap: 10px;
+    }
+    .bar-label {
+      font-size: 0.95rem;
+    }
+    .bar-value {
+      font-size: 1.1rem;
+    }
+    
+    /* 圓餅圖：圖與圖例改成上下排列 */
+    .pie-wrap {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .pie-donut-wrap {
+      width: clamp(160px, 55vw, 240px);
+      height: clamp(160px, 55vw, 240px);
+    }
+    
+    /* 星象特質對照：兩欄改一欄 */
+    .traits-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    /* 議程表：雙欄改單欄，取消不換行限制避免內容被裁掉，
+       改由文字換行＋整頁捲動來容納 */
+    .agenda-columns {
+      grid-template-columns: 1fr;
+      gap: 24px 0;
+    }
+    .agenda-time,
+    .agenda-main-title,
+    .agenda-speaker,
+    .agenda-sub-speaker,
+    .agenda-sub-duration {
+      white-space: normal;
+    }
+    .agenda-table {
+      font-size: 15px;
+    }
+    .agenda-sub-title,
+    .agenda-sub-speaker {
+      font-size: 15px;
+    }
+    .agenda-subgrid {
+      grid-template-columns: 1fr;
+      row-gap: 2px;
+    }
+    .agenda-sub-speaker {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px dashed var(--border-strong);
+      padding-top: 2px;
+      margin-bottom: 6px;
+    }
+    
+    /* 議程流程投影片：標題字級在窄螢幕再收斂一些 */
+    .flow-title-heading {
+      font-size: clamp(1.7rem, 8vw, 2.6rem) !important;
+    }
+    .flow-discuss-card .flow-title-heading {
+      font-size: clamp(1.5rem, 7vw, 2.2rem) !important;
+    }
+    
+    .fullscreen-btn {
+      display: none;
+    }
+  }
 
 </style>
 </head>
@@ -993,6 +1120,8 @@
   
   function render() {
     slides.forEach(function (el, i) { el.classList.toggle('active', i === current); });
+    slides[current].scrollTop = 0;
+    if (typeof renderWordClouds === 'function') { renderWordClouds(); }
   }
   
   function goTo(index) {
@@ -1037,16 +1166,21 @@
     }
   });
   
-  // 觸控滑動（觸控板／手機）支援左右滑動切換
+  // 觸控滑動（觸控板／手機）支援左右滑動切換；手機直式投影片可垂直捲動，
+  // 這裡額外比較垂直位移，避免上下捲動被誤判成左右切頁。
   var touchStartX = null;
+  var touchStartY = null;
   document.addEventListener('touchstart', function (e) {
     touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
   }, { passive: true });
   document.addEventListener('touchend', function (e) {
     if (touchStartX === null) return;
     var dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
     touchStartX = null;
+    touchStartY = null;
   }, { passive: true });
   
   function toggleFullscreen() {
