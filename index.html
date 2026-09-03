@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4.5vh 4vw 100px;
+    padding: 4.5vh 4vw 3.5vh;
     opacity: 0;
     visibility: hidden;
     transform: translateX(24px);
@@ -392,19 +392,19 @@
   
   /* 議程表格：這一頁內容較密，讓外層留白縮到最小、卡片盡量撐滿畫面 */
   .slide:has(.agenda-card) {
-    padding: 2vh 1.5vw 90px;
+    padding: 1.5vh 1.5vw 1.5vh;
   }
   .agenda-card {
     max-width: 98vw;
-    max-height: 94vh;
-    padding: clamp(10px, 2vh, 24px) clamp(16px, 2.4vw, 32px);
+    max-height: 97vh;
+    padding: clamp(8px, 1.4vh, 18px) clamp(16px, 2.4vw, 32px);
   }
   .agenda-card .card-head h2 {
-    font-size: clamp(1.3rem, 2vh + 1rem, 1.9rem);
+    font-size: clamp(1.15rem, 1.6vh + 0.9rem, 1.6rem);
   }
   .agenda-card .card-subtitle {
-    margin: 4px 0 10px;
-    font-size: clamp(0.85rem, 1.4vh + 0.5rem, 1rem);
+    margin: 2px 0 6px;
+    font-size: clamp(0.8rem, 1.2vh + 0.45rem, 0.95rem);
   }
   .agenda-columns {
     display: grid;
@@ -414,8 +414,8 @@
   .agenda-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: clamp(21px, 0.85vw + 14px, 23px);
-    line-height: 1.35;
+    font-size: clamp(17px, 0.7vw + 11px, 19px);
+    line-height: 1.22;
     table-layout: fixed;
     border: 2px solid var(--border-strong);
   }
@@ -423,17 +423,17 @@
     text-align: center;
     color: var(--text-muted);
     font-weight: 700;
-    font-size: clamp(14px, 0.5vw + 10px, 16px);
+    font-size: clamp(12px, 0.4vw + 9px, 14px);
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    padding: 4px 10px;
-    border: 2px solid var(--border-strong);
+    padding: 3px 10px;
+    border: 1px solid var(--border-strong);
     background: var(--bg);
     white-space: nowrap;
   }
   .agenda-table td {
-    padding: 5px 10px;
-    border: 2px solid var(--border-strong);
+    padding: 3px 9px;
+    border: 1px solid var(--border-strong);
     vertical-align: middle;
     text-align: left;
   }
@@ -461,19 +461,19 @@
   .agenda-subgrid {
     display: grid;
     grid-template-columns: 1fr auto;
-    row-gap: 6px;
-    column-gap: 16px;
-    margin-top: 6px;
+    row-gap: 3px;
+    column-gap: 14px;
+    margin-top: 3px;
   }
   .agenda-sub-title {
     font-weight: 400;
-    font-size: clamp(21px, 0.85vw + 14px, 23px);
-    line-height: 1.3;
+    font-size: clamp(17px, 0.7vw + 11px, 19px);
+    line-height: 1.2;
   }
   .agenda-sub-speaker {
     font-weight: 400;
-    font-size: clamp(21px, 0.85vw + 14px, 23px);
-    line-height: 1.3;
+    font-size: clamp(17px, 0.7vw + 11px, 19px);
+    line-height: 1.2;
     color: var(--text-muted);
     white-space: nowrap;
     padding-left: 16px;
